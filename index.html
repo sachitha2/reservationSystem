@@ -19,23 +19,17 @@
 <div ng-app="myApp" ng-controller="myCtrl"> 
         <div class="jumbotron text-center">
             <h1>Reservation Sysytem</h1>
-        </div>
-        <div class="container">
-            <h1>Select your reservation type</h1>
             
-                <button  class="btn btn-primary btn-lg" ng-click="room()">Room</button>
-                <button  class="btn btn-primary btn-lg"  ng-click="hall()">Reservation</button>
-                <button class="btn btn-primary btn-lg" ng-click="customerForm()">customer</button>
-
-                
-                
-                
-
-                    <p>{{ count }}</p>
-                <div class="row" id="x">
-
+        </div>
+        <h1 style="text-align: center">Select your reservation type</h1>
+        <div class="container" id="x">
+                    <center>
+                        <button  class="btn btn-primary btn-lg" ng-click="roomReservation()">Room</button>
+                        <button  class="btn btn-primary btn-lg"  ng-click="hallReservation()">Hall</button>
+                    </center>
+                    
                         
-                </div>
+                    
         </div>
     
 
@@ -44,16 +38,16 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-    $scope.room = function() {
-        $http.get("room.html")
+    $scope.roomReservation = function() {
+        $http.get("customerForm.html")
         .then(function(response) {
         $scope.myWelcome = response.data;
         document.getElementById("x").innerHTML = response.data;
         });
     }
 
-    $scope.hall = function() {
-        $http.get("hall.html")
+    $scope.hallReservation = function() {
+        $http.get("customerForm.html")
         .then(function(response) {
         $scope.myWelcome = response.data;
         document.getElementById("x").innerHTML = response.data;
@@ -67,6 +61,13 @@ app.controller('myCtrl', function($scope, $http) {
         });
     }
 
+    $scope.loadCustomerForm = function() {
+        $http.get("customerForm.html")
+        .then(function(response) {
+        $scope.myWelcome = response.data;
+        document.getElementById("x").innerHTML = response.data;
+        });
+    }
   
 });
 
