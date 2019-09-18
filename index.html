@@ -1,45 +1,45 @@
-<!doctype html>
-<html ng-app>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+        <div class="jumbotron text-center">
+            <h1>My First Bootstrap Page</h1>
+            <p>Resize this responsive page to see the effect!</p>
+        </div>
+        <div class="container">
+                <button  class="btn btn-primary btn-lg">Room</button>
+                <button  class="btn btn-primary btn-lg">Reservation</button>
+                <div class="row" id="x">
+                        <p>Today's welcome message is:</p>
+
+                        
+                </div>
+        </div>
     
 
-<div class="jumbotron text-center" ng-app="myApp" ng-controller="myCtrl">
-    <h1>Reservation</h1>
-  </div>
-    
-  <div class="container" id="container">
-      <button  class="btn btn-primary btn-lg">HAll</button>
-      <button  class="btn btn-primary btn-lg">ROOM</button>
-    <div class="row">
-            {{myWelcome}}
-    </div>
-  </div>
+</div>
 
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+  $http.get("room.html")
+  .then(function(response) {
+      $scope.myWelcome = response.data;
+      document.getElementById("x").innerHTML = response.data;
+  });
+});
+</script>
 
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
-    <script>
-            var app = angular.module('myApp', []);
-            app.controller('myCtrl', function($scope, $http) {
-              $http.get("room.html")
-              .then(function(response) {
-                $scope.myWelcome = response.data;
-              });
-            });
-            </script>
-  </body>
+</body>
 </html>
