@@ -17,13 +17,8 @@
             <h1>Reservation Sysytem</h1>
         </div>
         <div class="container">
-                <button  class="btn btn-primary btn-lg" ng-click="myFunction()">Room</button>
+                <button  class="btn btn-primary btn-lg" >Room</button>
                 <button  class="btn btn-primary btn-lg">Reservation</button>
-
-
-                
-
-                    <p>{{ count }}</p>
                 <div class="row" id="x">
 
                         
@@ -36,18 +31,12 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-    $scope.myFunction = function() {
-        $http.get("room.html")
-        .then(function(response) {
-        $scope.myWelcome = response.data;
-        document.getElementById("x").innerHTML = response.data;
-        });
-    }
-
-  
+  $http.get("room.html")
+  .then(function(response) {
+      $scope.myWelcome = response.data;
+      document.getElementById("x").innerHTML = response.data;
+  });
 });
-
-
 </script>
 
 </body>
