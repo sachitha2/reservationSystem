@@ -10,6 +10,10 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+
+
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl"> 
@@ -17,10 +21,14 @@
             <h1>Reservation Sysytem</h1>
         </div>
         <div class="container">
-                <button  class="btn btn-primary btn-lg" ng-click="myFunction()">Room</button>
-                <button  class="btn btn-primary btn-lg">Reservation</button>
+            <h1>Select your reservation type</h1>
+            
+                <button  class="btn btn-primary btn-lg" ng-click="room()">Room</button>
+                <button  class="btn btn-primary btn-lg"  ng-click="hall()">Reservation</button>
+                <button class="btn btn-primary btn-lg" ng-click="customerForm()">customer</button>
 
-
+                
+                
                 
 
                     <p>{{ count }}</p>
@@ -36,8 +44,23 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-    $scope.myFunction = function() {
+    $scope.room = function() {
         $http.get("room.html")
+        .then(function(response) {
+        $scope.myWelcome = response.data;
+        document.getElementById("x").innerHTML = response.data;
+        });
+    }
+
+    $scope.hall = function() {
+        $http.get("hall.html")
+        .then(function(response) {
+        $scope.myWelcome = response.data;
+        document.getElementById("x").innerHTML = response.data;
+        });
+    }
+    $scope.customerForm = function() {
+        $http.get("customerForm.html")
         .then(function(response) {
         $scope.myWelcome = response.data;
         document.getElementById("x").innerHTML = response.data;
