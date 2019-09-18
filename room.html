@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
-      <div class="col-sm">
+      <div class="col-lg-2">
         
       </div>
-      <div class="col-sm">
+      <div class="col-lg-8">
         <h2 class="h4 mb-4">Room Reservation</h2>
 
         <input type="text" id="booking_id" placeholder="Booking ID" class="form-control"> <br>
@@ -19,17 +19,21 @@
 
         <h2 class="h4 mb-4">Details</h2>
 
+        <label>Arrive</label>
         <input type="date" id="arrive" class="form-control"> <br>
 
+        <label>Depart</label>
         <input type="date" id="depart" class="form-control"> <br>
 
-        <input type="number" id="no_sin_rooms" class="form-control"> <br>
+        <label>Number of single rooms</label>
+        <input type="number" max="10" id="no_sin_rooms" class="form-control"> <br>
 
-        <input type="number" id="no_doub_rooms" class="form-control"> <br>
+        <label>Number of double rooms</label>
+        <input type="number" max="10" id="no_doub_rooms" class="form-control"> <br>
 
         <button type="button" id="book" class="btn btn-primary btn-lg">Book</button>
       </div>
-      <div class="col-sm">
+      <div class="col-lg-2">
         
       </div>
     </div>
