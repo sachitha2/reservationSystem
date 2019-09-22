@@ -4,9 +4,9 @@
         
       </div>
       <div class="col-lg-8">
-        <button ng-click="registerCustomerForRoom()" class="btn btn-success" type="button">Back</button>
+        <!-- <button ng-click="registerCustomerForRoom()" class="btn btn-success" type="button">Back</button> -->
         <h2 class="h4 mb-4">Room Reservation</h2>
-        <button type="button" ng-click="autoFillDataRoom()" class="btn btn-success" >Auto fill data</button>
+        <button type="button" ng-click="autoFillDataRoom()" class="btn btn-info" >Auto fill data</button>
 
         <!-- <input type="text" id="booking_id" placeholder="Booking ID" class="form-control"> <br> -->
 
@@ -22,17 +22,17 @@
         <h2 class="h4 mb-4">Details</h2>
 
         <label>Arrive</label>
-        <input type="date" ng-model="arrive" class="form-control"  > <br>
+        <input type="date" ng-model="arrive" class="form-control"  id="arrive" > <br>
 
         <label>Depart</label>
-        <input type="date" ng-model="depart" class="form-control"> <br>
+        <input type="date" ng-model="depart" class="form-control" id="depart"> <br>
 
         <label>Number of single rooms</label>
-        <input type="number" max="10" ng-model="no_sin_rooms" class="form-control"> <br>
+        <input type="number" max="10" ng-model="no_sin_rooms" class="form-control" id="no_sin_rooms"> <br>
 
         <label>Number of double rooms</label>
-        <input type="number" max="10" ng-model="no_doub_rooms" class="form-control"> <br>
-
+        <input type="number" max="10" ng-model="no_doub_rooms" class="form-control" id="no_doub_rooms"> <br>
+        <div id="msg"></div>
         <center><button type="button" ng-click="finishRoomBkng()" class="btn btn-primary btn-lg">Book</button></center>
       </div>
       <div class="col-lg-2">

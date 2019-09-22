@@ -1,4 +1,4 @@
-<button ng-click="backDesideInFinish()" class="btn btn-success" type="button">Back</button>
+<!-- <button ng-click="backDesideInFinish()" class="btn btn-success" type="button">Back</button> -->
 
 <p>Customer first name</p>
 <input type="text"  placeholder="First Name" class="form-control" ng-model="fName" readonly><br>
@@ -23,7 +23,10 @@
 
 <h2>Booking type {{bTypeHead}}</h2>
 <div id="bknData">
-   {{data}}
+    <ul>
+        <li ng-repeat="x in data"><h2>{{x.name}} : {{x.data}}</h2></li>
+    </ul>
+    <!-- {{data}} -->
 </div>
 <div>{{result}}</div>
 <button class="btn btn-primary btn-lg" ng-click="finish()">Finish</button>

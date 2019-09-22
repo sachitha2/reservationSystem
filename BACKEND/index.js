@@ -62,22 +62,31 @@ app.get('/rooms',(req,res)=>{
 app.post('/booking/',(req,res)=>{
     
     
-    // res.send(req.body);
-
     
     let booking = req.body;
-    
-    
-    mysqlConnection.query('INSERT INTO customer (id, fName,lName,nic,address,tel,email,rDate) VALUES ("", "a","a","v","grrg","0715591137","shpsachitha@gmail.com", curdate());',(err,rows,fields)=>{
+    if(booking.type == 1){
+        //Room booking
+    mysqlConnection.query('',(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
             console.log(err);
         }
     });
+
+
+    }else if(booking.type == 2){
+        //Hall booking
+        res.send("Hall booking");
+    }else{
+       //Nothing here
+    }
+    
+    
 });
 //Load Customer bookings
 app.get('/myBookings/:id',(req,res)=>{
+    var bookings;
     mysqlConnection.query('SELECT * FROM rooms',(err,rows,fields)=>{
         if(!err){
             res.send(rows);
