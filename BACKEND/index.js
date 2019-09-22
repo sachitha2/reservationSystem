@@ -6,7 +6,7 @@ var app = express();
 const bodyparser = require('body-parser');
 
 
-app.use(function (req, res, next) {
+app.use(bodyparser.json(),function (req, res, next) {
   /*var err = new Error('Not Found');
    err.status = 404;
    next(err);*/
@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(bodyparser.json());
+
 
 var mysqlConnection = mysql.createConnection({
     host:'localhost',
@@ -62,29 +62,30 @@ app.get('/rooms',(req,res)=>{
 app.post('/booking/',(req,res)=>{
     
     
-    res.send(req.body);
+    // res.send(req.body);
 
     
     let booking = req.body;
     
     
-    mysqlConnection.query('INSERT INTO rooms (room_no, room_type, price) VALUES (\'?\', \'?\', \'?\');',[emp.rId,emp.rId,emp.rId],(err,rows,fields)=>{
+    mysqlConnection.query('INSERT INTO customer (id, fName,lName,nic,address,tel,email,rDate) VALUES ("", "a","a","v","grrg","0715591137","shpsachitha@gmail.com", curdate());',(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
             console.log(err);
         }
     });
-
-//     mysqlConnection.query('SELECT * FROM rooms WHERE room_no = ?',[req.params.id],(err,rows,fields)=>{
-//         if(!err){
-//             res.send(rows);
-//         }else{
-//             console.log(err);
-//         }
-//     });
 });
-
+//Load Customer bookings
+app.get('/myBookings/:id',(req,res)=>{
+    mysqlConnection.query('SELECT * FROM rooms',(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 
 //room/1
 app.get('/rooms/:id',(req,res)=>{

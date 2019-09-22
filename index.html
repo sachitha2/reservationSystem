@@ -83,6 +83,9 @@ app.controller('myCtrl', function($scope, $http) {
     },{
         name:"finish booking",
         url:"finishBooking.html"
+    },{
+        name:"my bookings",
+        url:"myBookings.html"
     }
     ];
 
@@ -94,6 +97,11 @@ app.controller('myCtrl', function($scope, $http) {
         $scope.bTypeHead = "";
     }
     $scope.defaultTemplate();
+    //Load my bookings
+    $scope.loadMyBookingsPage = function(){
+        $scope.template = $scope.templates[5];
+    }
+
     //this is for room
     $scope.registerCustomerForRoom=function(){
         $scope.bookingType = 1;
@@ -136,7 +144,7 @@ app.controller('myCtrl', function($scope, $http) {
         $scope.customer.lName = $scope.lName;
         $scope.customer.nic   = $scope.cNic;
         $scope.customer.address = $scope.cAddress;
-        $scope.customer.tel = $scope.tel;
+        $scope.customer.tel = $scope.cPhone;
         $scope.customer.email = $scope.cEmail;
         if($scope.bookingType == 1){
             //Room
@@ -205,6 +213,11 @@ app.controller('myCtrl', function($scope, $http) {
             }, function myError(response) {
             $scope.data = response.statusText;
         });
+    }
+
+
+    $scope.loadMyBookings = function(){
+        
     }
 });
 
