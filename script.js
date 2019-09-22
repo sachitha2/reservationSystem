@@ -195,12 +195,30 @@ app.controller('myCtrl', function($scope, $http) {
     }  
     }
     $scope.finishHallBkng = function(){
-       hall.bknDate = $scope.booking_date;
-       hall.purpose = $scope.purpose;
-       hall.payment = $scope.payment;
+       hall.bknDate = document.getElementById('booking_date').value;
+       hall.purpose = document.getElementById('purpose').value;
+       hall.payment = document.getElementById('pay_amount').value;
 
+
+
+
+
+       var temp = {
+        data: [
+             {
+             name:"Booking Date",
+             data:hall.bknDate
+         },{
+             name:"purpose",
+             data:hall.purpose
+         },{
+             name:"payment",
+             data:hall.payment
+         }
+         ]
+     };
         $scope.template = $scope.templates[4];
-        $scope.data = "Hall Data";
+        $scope.data = temp.data;
     }
 
     $scope.backDesideInFinish = function(){
