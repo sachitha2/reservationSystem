@@ -21,14 +21,11 @@
             <h1>Reservation Sysytem</h1>
             
         </div>
-        <h1 style="text-align: center">Select your reservation type</h1>
+        
         <div class="container" id="x">
-                    <center>
-                        <button  class="btn btn-primary btn-lg" ng-click="roomReservation()">Room</button>
-                        <button  class="btn btn-primary btn-lg"  ng-click="hallReservation()">Hall</button>
-                    </center>
-                    
-                        
+                <div ng:include="template.url"></div>
+                   
+                     
                     
         </div>
     
@@ -38,37 +35,68 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-    $scope.roomReservation = function() {
-        $http.get("customerForm.html")
-        .then(function(response) {
-        $scope.myWelcome = response.data;
-        document.getElementById("x").innerHTML = response.data;
-        });
+    $scope.bookingType = 0;
+    $scope.bTypeHead = "";
+    //0 for null
+    //1 for room
+    //2 for hall
+
+    $scope.templates = [{
+        name: 'Select Your Reservation Type',
+        url: 'selectType.html'
+    }, {
+        name: 'customerForm.html',
+        url: 'customerForm.html'
+    },
+    {
+        name:'room',
+        url:"room.html"
+    }
+    ];
+
+    
+    $scope.defaultTemplate=function(){
+        $scope.template = $scope.templates[0];
+        //Set default booking type as null
+        $scope.bookingType = 0;
+        $scope.bTypeHead = "";
+    }
+    $scope.defaultTemplate();
+    //this is for room
+    $scope.registerCustomerForRoom=function(){
+        $scope.bookingType = 1;
+        $scope.bTypeHead = "Room";
+        $scope.template = $scope.templates[1];
+    }
+    //this is for hall
+    $scope.registerCustomerForHall=function(){
+        $scope.bookingType = 2;
+        $scope.bTypeHead = "Hall";
+        $scope.template = $scope.templates[1];
     }
 
-    $scope.hallReservation = function() {
-        $http.get("customerForm.html")
-        .then(function(response) {
-        $scope.myWelcome = response.data;
-        document.getElementById("x").innerHTML = response.data;
-        });
-    }
-    $scope.customerForm = function() {
-        $http.get("customerForm.html")
-        .then(function(response) {
-        $scope.myWelcome = response.data;
-        document.getElementById("x").innerHTML = response.data;
-        });
+    //Auto fill data
+    //Autofill data for cutomer
+    $scope.autoFillDataCustomer  = function(){
+        $scope.fName = "First";
+        $scope.lName = " Last";
+        $scope.cNic = "123456789v";
+        $scope.cAddress = "Address 12345";
+        $scope.cPhone = "0710000000";
+        $scope.cEmail = "mail@mail.com";
     }
 
-    $scope.loadCustomerForm = function() {
-        $http.get("customerForm.html")
-        .then(function(response) {
-        $scope.myWelcome = response.data;
-        document.getElementById("x").innerHTML = response.data;
-        });
+    $scope.roomOrHall = function(){
+        if($scope.bookingType == 1){
+            //Room
+            $scope.template = $scope.templates[2];
+        }else if($scope.bookingType == 2){
+            //Hall
+            $scope.template = $scope.templates[0];
+        }else{
+
+        }
     }
-  
 });
 
 

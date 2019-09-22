@@ -4,21 +4,25 @@
         
       </div>
       <div class="col-lg-8">
-        <h2 class="h4 mb-4">Guest Information</h2>
+        <button ng-click="defaultTemplate()" class="btn btn-success" type="button">Back</button>
+        <h2 class="h4 mb-4">Guest Information  -  For {{bTypeHead}}</h2>
+        <button type="button" class="btn btn-info" ng-click="autoFillDataCustomer()">Auto fill data</button>
+        <br>
+        <br>
 
-        <input type="text" id="first_name" placeholder="First Name" class="form-control"> <br>
+        <input type="text"  placeholder="First Name" class="form-control" ng-model="fName"><br>
 
-        <input type="text" id="last_name" placeholder="Last Name" class="form-control"> <br>
+        <input type="text" placeholder="Last Name" class="form-control"  ng-model="lName"> <br>
 
-        <input type="text" id="nic" placeholder="NIC" class="form-control"> <br>
+        <input type="text"  placeholder="NIC" class="form-control" ng-model="cNic"> <br>
 
-        <input type="text" id="address" placeholder="Address" class="form-control"> <br>
+        <input type="text" placeholder="Address" class="form-control" ng-model="cAddress"> <br>
 
-        <input type="text" id="phone" placeholder="Phone" class="form-control"> <br>
+        <input type="text"  placeholder="Phone" class="form-control" ng-model="cPhone"> <br>
 
-        <input type="text" id="email" placeholder="Email" class="form-control"> <br>
-
-        <center><button type="button" id="next" class="btn btn-primary btn-lg">Next</button></center>
+        <input type="text"  placeholder="Email" class="form-control"  ng-model="cEmail"> <br>
+        <div id="msg"></div>
+        <center><button type="button" ng-click="roomOrHall()" class="btn btn-primary btn-lg">Next</button></center>
         <br>
       </div>
       <div class="col-lg-2">
