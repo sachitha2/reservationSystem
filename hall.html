@@ -4,18 +4,20 @@
         
       </div>
       <div class="col-lg-8">
+        <button ng-click="registerCustomerForHall()" class="btn btn-success" type="button">Back</button>
         <h2 class="h4 mb-4">Hall Reservation</h2>
+        <button type="button" ng-click="autoFillDataHall()" class="btn btn-success" >Auto fill data</button>
 
         <label>Booking Date</label>
-        <input type="date" id="booking_date" class="form-control"> <br>
+        <input type="date"  class="form-control" ng-model="booking_date"> <br>
 
         <label>Purpose</label>
-        <input type="text" placeholder="Purpose" id="purpose" class="form-control"> <br>
+        <input type="text" placeholder="Purpose" ng-model="purpose" class="form-control"> <br>
 
         <label>Pay Amount</label>
-        <input type="number" placeholder="Pay Amount" id="pay_amount" class="form-control"> <br>
+        <input type="number" placeholder="Pay Amount" ng-model="pay_amount" class="form-control"> <br>
 
-        <button type="button" id="book" class="btn btn-primary btn-lg">Book</button>
+        <center><button type="button" ng-click="finishHallBkng()" class="btn btn-primary btn-lg">Book</button></center>
       </div>
       <div class="col-lg-2">
         

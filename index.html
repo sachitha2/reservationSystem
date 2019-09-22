@@ -35,6 +35,32 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
+
+    $scope.hall = {
+        //bId:"",
+        bknDate :"",
+        purpose :"",
+        payment :""
+    }
+
+    $scope.room = {
+        //bId:"",
+        aDate:"",
+        dDate:"",
+        sR:0,
+        dR:0
+
+    }
+    $scope.customer ={
+        fName:"",
+        lName:"",
+        nic:"",
+        address:"",
+        tel:"",
+        email:""
+    }
+
+
     $scope.bookingType = 0;
     $scope.bTypeHead = "";
     //0 for null
@@ -51,6 +77,12 @@ app.controller('myCtrl', function($scope, $http) {
     {
         name:'room',
         url:"room.html"
+    },{
+        name:"hall",
+        url:"hall.html"
+    },{
+        name:"finish booking",
+        url:"finishBooking.html"
     }
     ];
 
@@ -85,17 +117,94 @@ app.controller('myCtrl', function($scope, $http) {
         $scope.cPhone = "0710000000";
         $scope.cEmail = "mail@mail.com";
     }
+    //Auto fill room data
+    $scope.autoFillDataRoom = function(){
+        $scope.arrive = "10/12/2019";
+        $scope.depart = "20/12/2019";
+        $scope.no_doub_rooms = 2;
+        $scope.no_sin_rooms = 2;
+    }
+
+    $scope.autoFillDataHall = function(){
+        $scope.booking_date = "10/12/2019";
+        $scope.purpose = "Purpose";
+        $scope.payment = 10000;
+    }
 
     $scope.roomOrHall = function(){
+        $scope.customer.fName = $scope.fName;
+        $scope.customer.lName = $scope.lName;
+        $scope.customer.nic   = $scope.cNic;
+        $scope.customer.address = $scope.cAddress;
+        $scope.customer.tel = $scope.tel;
+        $scope.customer.email = $scope.cEmail;
         if($scope.bookingType == 1){
             //Room
             $scope.template = $scope.templates[2];
         }else if($scope.bookingType == 2){
             //Hall
-            $scope.template = $scope.templates[0];
+            $scope.template = $scope.templates[3];
         }else{
 
         }
+    }
+
+    
+    
+
+    $scope.finishRoomBkng = function(){
+        $scope.room.aDate = $scope.arrive;
+        $scope.room.dDate = $scope.depart;
+        $scope.room.sR = $scope.no_sin_rooms;
+        $scope.room.dR = $scope.no_doub_rooms;
+
+        
+        $scope.template = $scope.templates[4];
+        $scope.data = "Room Data";
+
+    }
+    $scope.finishHallBkng = function(){
+        $scope.hall.bknDate = $scope.booking_date;
+        $scope.hall.purpose = $scope.purpose;
+        $scope.hall.payment = $scope.payment;
+
+        $scope.template = $scope.templates[4];
+        $scope.data = "Hall Data";
+    }
+
+    $scope.backDesideInFinish = function(){
+        if($scope.bookingType == 1){
+            //Room
+            $scope.template = $scope.templates[2];
+        }else if($scope.bookingType == 2){
+            //Hall
+            $scope.template = $scope.templates[3];
+        }else{
+
+        }
+
+    }
+    $scope.finish = function(){
+        var book = {
+            type : $scope.bookingType,
+            hall :$scope.hall,
+            room:$scope.room,
+            customer:$scope.customer
+        }
+
+        // $scope.result = book;
+
+
+        $http({
+            method : "POST",
+            data:JSON.stringify(book),
+            url : "http://localhost:3000/booking/"
+        }).then(function mySuccess(response) {
+            $scope.data = response.data;
+            
+            }, function myError(response) {
+            $scope.data = response.statusText;
+        });
     }
 });
 

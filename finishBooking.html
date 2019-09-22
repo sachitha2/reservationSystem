@@ -1,0 +1,29 @@
+<button ng-click="backDesideInFinish()" class="btn btn-success" type="button">Back</button>
+
+<p>Customer first name</p>
+<input type="text"  placeholder="First Name" class="form-control" ng-model="fName" readonly><br>
+
+<p>Customer last name</p>
+<input type="text"  placeholder="Last Name" class="form-control" ng-model="lName" readonly><br>
+
+<p>Customer NIC</p>
+<input type="text"  placeholder="NIC" class="form-control" ng-model="cNic" readonly> <br>
+
+<p>Customer Address</p>
+<input type="text" placeholder="Address" class="form-control" ng-model="cAddress" readonly> <br>
+
+<p>Customer Phone number</p>
+<input type="text"  placeholder="Phone" class="form-control" ng-model="cPhone" readonly> <br>
+
+
+<p>Customer Email</p>
+<input type="text"  placeholder="Email" class="form-control"  ng-model="cEmail" readonly> <br>
+
+
+
+<h2>Booking type {{bTypeHead}}</h2>
+<div id="bknData">
+   {{data}}
+</div>
+<div>{{result}}</div>
+<button class="btn btn-primary btn-lg" ng-click="finish()">Finish</button>
