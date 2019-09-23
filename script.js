@@ -1,7 +1,7 @@
 
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-
+    $scope.IsDisabled = false;
     var hall = {
         //bId:"",
         bknDate :"",
@@ -244,6 +244,7 @@ app.controller('myCtrl', function($scope, $http) {
 
     }
     $scope.finish = function(){
+        $scope.IsDisabled = true;
         var book = {
             type : $scope.bookingType,
             hall : hall,
@@ -259,10 +260,13 @@ app.controller('myCtrl', function($scope, $http) {
             data:JSON.stringify(book),
             url : "http://localhost:3000/booking/"
         }).then(function mySuccess(response) {
-            $scope.data = response.data;
+
+            reservationId = response.data.insertId;
+            console.log(reservationId);
+            document.getElementById("result").innerHTML = "<h1>Your reservation is done</h1>Reservation id - "+reservationId;
             
             }, function myError(response) {
-            $scope.data = response.statusText;
+            $scope.result = response.statusText;
         });
     }
 
