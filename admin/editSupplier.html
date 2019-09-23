@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Load main script file -->
+
+<style>
+    #msg{
+       color: red; 
+    }
+</style>
+<body >
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+        <div class="jumbotron text-center">
+                <div ng:include="'headder.html'"></div>
+        </div>
+        
+        <div>   
+                
+                <center>
+                        <p>Search : <input type="text" placeholder="Search" ng-model="globalSearch.$" class="form-control"></p> 
+                  </center>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Cancel</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Company Phone</th>
+
+                    </tr>
+                    <tr ng-repeat="x in data | filter : globalSearch">
+                        <td>{{x.s_id}}</td>
+                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="del(x.s_id)">Cancel</button></td>
+                        <td>{{x.s_name}}</td>
+                        <td>{{x.s_company}}</td>
+                        <td>{{x.s_phone}}</td>
+                        <td>{{x.s_email}}</td>
+                        <td>{{x.s_comaddress}}</td>
+                        <td>{{x.s_comphone}}</td>
+                    </tr>
+                </table>
+                
+                
+                <!-- <div ng:include="template.url"></div> -->
+                   
+                     
+                    
+        </div>
+    
+
+</div>
+
+<script>
+    
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $http) {
+            $scope.supplier = function(){
+                $http({
+                    method : "GET",
+                    url : "http://localhost:3000/suppliers/"
+                }).then(function mySuccess(response) {
+    
+                    supplier = response.data;
+                    $scope.data = supplier;
+                    console.log(supplier);
+                    
+                    }, function myError(response) {
+                    // $scope.result = response.statusText;
+                });
+            }
+
+            $scope.supplier();
+
+
+            $scope.del = function(id){
+                $http({
+                    method : "DELETE",
+                    data:"",
+                    url : "http://localhost:3000/supplier/"+id
+                }).then(function mySuccess(response) {
+
+                    supplier = response.data;
+                    // $scope.data = supplier;
+                    console.log(supplier);
+                    $scope.supplier();
+                    
+                    }, function myError(response) {
+                    // $scope.result = response.statusText;
+                });
+    }
+        });
+    
+    
+    
+    </script>
+
+</body>
+</html>

@@ -106,7 +106,17 @@ app.get('/hallBooking/',(req,res)=>{
         }
     });
 });
-
+//Load suppliers
+app.get('/suppliers/',(req,res)=>{
+    var bookings;
+    mysqlConnection.query('SELECT * FROM suppliers',(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 //Load room bookings
 app.get('/roomBooking/',(req,res)=>{
     var bookings;
@@ -126,6 +136,16 @@ app.get('/roomBooking/',(req,res)=>{
 
 app.delete('/roomCancel/:id',(req,res)=>{
     mysqlConnection.query('DELETE FROM room_reservation WHERE room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{
+        if(!err){
+            res.send("Deleted successully");
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/supplier/:id',(req,res)=>{
+    mysqlConnection.query('DELETE FROM suppliers WHERE suppliers.s_id =  ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
             res.send("Deleted successully");
         }else{
