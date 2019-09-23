@@ -59,11 +59,13 @@
     app.controller('myCtrl', function($scope, $http) {
         $scope.addSupplier = function(){
             var supplier = {
-                name:"",
-                email:"",
-                cName:"",
-                tel:"",
-                address:"",
+                data:{
+                    name:"",
+                    email:"",
+                    cName:"",
+                    tel:"",
+                    address:""
+                }
             }
 
             supplier.name = document.getElementById("supName").value;
