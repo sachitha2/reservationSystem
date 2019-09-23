@@ -35,6 +35,7 @@
                 <table class="table table-hover table-bordered table-striped table-dark">
                     <tr>
                         <th>Id</th>
+                        <th>Cancel</th>
                         <th>Name</th>
                         <th>Tel</th>
                         <th>Nic</th>
@@ -44,9 +45,11 @@
                         <th>Check out</th>
                         <th>S Room</th>
                         <th>D Room</th>
+
                     </tr>
                     <tr ng-repeat="x in data | filter : globalSearch">
                         <td>{{x.r_rid}}</td>
+                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="cancel(x.r_rid)">Cancel</button></td>
                         <td>{{x.r_cname}}</td>
                         <td>{{x.r_phone}}</td>
                         <td>{{x.r_nic}}</td>

@@ -149,6 +149,28 @@ app.delete('/rooms/:id',(req,res)=>{
     });
 });
 
+
+app.delete('/roomCancel/:id',(req,res)=>{
+    mysqlConnection.query('DELETE FROM room_reservation WHERE room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{
+        if(!err){
+            res.send("Deleted successully");
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+app.delete('/hallCancel/:id',(req,res)=>{
+    mysqlConnection.query('DELETE FROM hall_reservation WHERE hall_reservation.h_rid =  ?;',[req.params.id],(err,rows,fields)=>{
+        if(!err){
+            res.send("Deleted successully");
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+
 //Insert a room
 app.post('/rooms/',(req,res)=>{
     let emp = req.body;
