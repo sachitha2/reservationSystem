@@ -48,16 +48,7 @@ mysqlConnection.connect((err)=>{
 
 app.listen(3000,()=>console.log('Express server is running ar port 3000 '));
 
-//get all rooms
-app.get('/rooms',(req,res)=>{
-    mysqlConnection.query('SELECT * FROM rooms',(err,rows,fields)=>{
-        if(!err){
-            res.send(rows);
-        }else{
-            console.log(err);
-        }
-    });
-});
+
 //add bookings
 app.post('/booking/',(req,res)=>{
     
@@ -127,27 +118,9 @@ app.get('/roomBooking/',(req,res)=>{
     });
 });
 
-//room/1
-app.get('/rooms/:id',(req,res)=>{
-    mysqlConnection.query('SELECT * FROM rooms WHERE room_no = ?',[req.params.id],(err,rows,fields)=>{
-        if(!err){
-            res.send(rows);
-        }else{
-            console.log(err);
-        }
-    });
-});
 
-//Delete a room
-app.delete('/rooms/:id',(req,res)=>{
-    mysqlConnection.query('DELETE  FROM rooms WHERE room_no = ?',[req.params.id],(err,rows,fields)=>{
-        if(!err){
-            res.send("Deleted successully");
-        }else{
-            console.log(err);
-        }
-    });
-});
+
+
 
 
 app.delete('/roomCancel/:id',(req,res)=>{
@@ -171,14 +144,3 @@ app.delete('/hallCancel/:id',(req,res)=>{
 });
 
 
-//Insert a room
-app.post('/rooms/',(req,res)=>{
-    let emp = req.body;
-    mysqlConnection.query('INSERT INTO rooms (room_no, room_type, price) VALUES (\'?\', \'?\', \'?\');',[emp.rId,emp.rId,emp.rId],(err,rows,fields)=>{
-        if(!err){
-            res.send(rows);
-        }else{
-            console.log(err);
-        }
-    });
-});
