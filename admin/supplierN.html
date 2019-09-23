@@ -68,32 +68,32 @@
                 }
             }
 
-            supplier.name = document.getElementById("supName").value;
-            supplier.email = document.getElementById("Email").value;
-            supplier.cName = document.getElementById("compName").value;
-            supplier.tel = document.getElementById("tp").value;
-            supplier.address = document.getElementById("compAddress").value;
+            supplier.data.name = document.getElementById("supName").value;
+            supplier.data.email = document.getElementById("Email").value;
+            supplier.data.cName = document.getElementById("compName").value;
+            supplier.data.tel = document.getElementById("tp").value;
+            supplier.data.address = document.getElementById("compAddress").value;
 
-           if(supplier.name == ""){
+           if(supplier.data.name == ""){
                 document.getElementById("msg").innerHTML = "Enter name";
-           }else if(supplier.email == ""){
+           }else if(supplier.data.email == ""){
                 document.getElementById("msg").innerHTML = "Enter email";
-           }else if(supplier.cName == ""){
+           }else if(supplier.data.cName == ""){
                 document.getElementById("msg").innerHTML = "Enter customer name";
-           }else if(supplier.tel == ""){
+           }else if(supplier.data.tel == ""){
                 document.getElementById("msg").innerHTML = "Enter customer telephone number";
-           }else if(supplier.address == ""){
+           }else if(supplier.data.address == ""){
                 document.getElementById("msg").innerHTML = "Enter customer address";
            }else{
-               console.log(supplier);
+               console.log(supplier.data);
                 $http({
                 method : "POST",
-                data:JSON.stringify(supplier),
+                data:JSON.stringify(supplier.data),
                 url : "http://localhost:3000/supplier/"
                 }).then(function mySuccess(response) {
 
-                reservationId = response.data;
-                console.log(reservationId);
+                reservationId = response.data.insertId;
+                console.log("Responsed data"+reservationId);
                 document.getElementById("msg").innerHTML = "<h1>done</h1> id - "+reservationId;
                 
                 }, function myError(response) {

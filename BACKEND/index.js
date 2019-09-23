@@ -85,15 +85,15 @@ app.post('/booking/',(req,res)=>{
 //add supplier
 app.post('/supplier/',(req,res)=>{
         let supplier = req.body;
-        console.log(supplier);
+        console.log(supplier.name);
         // res.send(supplier);
-        // mysqlConnection.query("INSERT INTO suppliers (s_id, s_name, s_company, s_phone, s_email, s_comaddress, s_comphone) VALUES (NULL, '"+supplier.supplier.cName+"', 'bevs', 'fbvc', 'betvc', 'bvdsa', 'bgrvs')",(err,rows,fields)=>{
-        //     if(!err){
-        //         res.send(rows);
-        //     }else{
-        //         console.log(err);
-        //     }
-        // }); 
+        mysqlConnection.query("INSERT INTO suppliers (s_id, s_name, s_company, s_phone, s_email, s_comaddress, s_comphone) VALUES (NULL, '"+supplier.name+"', '"+supplier.cName+"', '"+supplier.tel+"', '"+supplier.email+"', '"+supplier.address+"', '')",(err,rows,fields)=>{
+            if(!err){
+                res.send(rows);
+            }else{
+                console.log(err);
+            }
+        }); 
     
 });
 //Load Customer bookings
