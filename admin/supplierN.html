@@ -18,19 +18,43 @@
     <div class="jumbotron text-center">
             <div ng:include="'headder.html'"></div>
     </div>
-    <form name="myForm">
-        <p>Name:
-            <input name="sId" ng-model="sId" placeholder="Supplier ID" class="form-control" required>
-            <span ng-show="myForm.sId.$touched && myForm.sId.$invalid">The name is required.</span>
+    <form name="supplierForm">
+
+        <p>Supplier ID:
+            <input type="text" name="supId" ng-model="supId" placeholder="Supplier ID" class="form-control" required>
+            <span ng-show="supplierForm.supId.$touched && supplierForm.supId.$invalid">Supplier ID is required.</span>
         </p>
 
-        <p>Address:
-        <input name="myAddress" ng-model="myAddress" required>
+        <p>Supplier Name:
+            <input name="supName" ng-model="supName" placeholder="Supplier Name" class="form-control" required>
+            <span ng-show="supplierForm.supName.$touched && supplierForm.supName.$invalid">Supplier Name is required.</span>
         </p>
+
+        <p>Email:
+            <input name="Email" ng-model="Email" placeholder="Email" class="form-control" required>
+            <span ng-show="supplierForm.Email.$touched && supplierForm.Email.$invalid">Email is required.</span>
+        </p>
+
+        <p>Company Name:
+            <input name="compName" ng-model="compName" placeholder="Company Name" class="form-control" required>
+            <span ng-show="supplierForm.compName.$touched && supplierForm.compName.$invalid">Company Name is required.</span>
+        </p>
+
+        <p>Phone Number:
+            <input type="number" name="tp" ng-model="tp" placeholder="Phone Number" class="form-control" required>
+            <span ng-show="supplierForm.tp.$touched && supplierForm.tp.$invalid">Phone Number is required.</span>
+        </p>
+
+        <p>Company Address:
+            <input name="compAddress" ng-model="compAddress" placeholder="Company Address" class="form-control" required>
+            <span ng-show="supplierForm.compAddress.$touched && supplierForm.compAddress.$invalid">Company Address is required.</span>
+        </p>
+
+        <input class="btn btn-primary btn-lg" type="submit" id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) || (supplierForm.supId.$dirty && supplierForm.supId.$invalid) || (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)">
 
     </form>
 
-    <p>We use the ng-show directive to only show the error message if the field has been touched AND is empty.</p>
+    
 
 </body>
 </html>
