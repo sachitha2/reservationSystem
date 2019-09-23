@@ -82,8 +82,22 @@ app.post('/booking/',(req,res)=>{
     
     
 });
+//add supplier
+app.post('/supplier/',(req,res)=>{
+        let supplier = req.body;
+        console.log(supplier);
+        // res.send(supplier);
+        // mysqlConnection.query("INSERT INTO suppliers (s_id, s_name, s_company, s_phone, s_email, s_comaddress, s_comphone) VALUES (NULL, '"+supplier.supplier.cName+"', 'bevs', 'fbvc', 'betvc', 'bvdsa', 'bgrvs')",(err,rows,fields)=>{
+        //     if(!err){
+        //         res.send(rows);
+        //     }else{
+        //         console.log(err);
+        //     }
+        // }); 
+    
+});
 //Load Customer bookings
-///TODO
+
 app.get('/myBookings/:id',(req,res)=>{
     var bookings;
     mysqlConnection.query('SELECT * FROM room_reservation where  room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{
@@ -133,7 +147,7 @@ app.get('/roomBooking/',(req,res)=>{
 
 
 
-
+//delete room booking
 app.delete('/roomCancel/:id',(req,res)=>{
     mysqlConnection.query('DELETE FROM room_reservation WHERE room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
@@ -143,7 +157,7 @@ app.delete('/roomCancel/:id',(req,res)=>{
         }
     });
 });
-
+//delete supplier
 app.delete('/supplier/:id',(req,res)=>{
     mysqlConnection.query('DELETE FROM suppliers WHERE suppliers.s_id =  ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
@@ -153,7 +167,7 @@ app.delete('/supplier/:id',(req,res)=>{
         }
     });
 });
-
+//delete hall booking
 app.delete('/hallCancel/:id',(req,res)=>{
     mysqlConnection.query('DELETE FROM hall_reservation WHERE hall_reservation.h_rid =  ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){

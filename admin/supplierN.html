@@ -11,8 +11,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         
-        <!-- Load main script file -->
-        <script src="supplier.js"></script> 
+        <!-- Load main script file --> 
 <body ng-app="myApp" ng-controller="myCtrl">
 
     <div class="jumbotron text-center">
@@ -20,41 +19,87 @@
     </div>
     <form name="supplierForm">
 
-        <p>Supplier ID:
+        <!-- <p>Supplier ID:
             <input type="text" name="supId" ng-model="supId" placeholder="Supplier ID" class="form-control" required>
             <span ng-show="supplierForm.supId.$touched && supplierForm.supId.$invalid">Supplier ID is required.</span>
-        </p>
+        </p> -->
 
         <p>Supplier Name:
-            <input name="supName" ng-model="supName" placeholder="Supplier Name" class="form-control" required>
+            <input name="supName" ng-model="supName" id="supName" placeholder="Supplier Name" class="form-control" required>
             <span ng-show="supplierForm.supName.$touched && supplierForm.supName.$invalid">Supplier Name is required.</span>
         </p>
 
         <p>Email:
-            <input name="Email" ng-model="Email" placeholder="Email" class="form-control" required>
+            <input name="Email" ng-model="Email" id="Email" placeholder="Email" class="form-control" required>
             <span ng-show="supplierForm.Email.$touched && supplierForm.Email.$invalid">Email is required.</span>
         </p>
 
         <p>Company Name:
-            <input name="compName" ng-model="compName" placeholder="Company Name" class="form-control" required>
+            <input name="compName" ng-model="compName" id="compName" placeholder="Company Name" class="form-control" required>
             <span ng-show="supplierForm.compName.$touched && supplierForm.compName.$invalid">Company Name is required.</span>
         </p>
 
         <p>Phone Number:
-            <input type="number" name="tp" ng-model="tp" placeholder="Phone Number" class="form-control" required>
+            <input type="number" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
             <span ng-show="supplierForm.tp.$touched && supplierForm.tp.$invalid">Phone Number is required.</span>
         </p>
 
         <p>Company Address:
-            <input name="compAddress" ng-model="compAddress" placeholder="Company Address" class="form-control" required>
+            <input name="compAddress" ng-model="compAddress" id="compAddress" placeholder="Company Address" class="form-control" required>
             <span ng-show="supplierForm.compAddress.$touched && supplierForm.compAddress.$invalid">Company Address is required.</span>
         </p>
-
-        <input class="btn btn-primary btn-lg" type="submit" id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) || (supplierForm.supId.$dirty && supplierForm.supId.$invalid) || (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)">
+        <div id="msg"></div>
+        <input class="btn btn-primary btn-lg" type="submit"  id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) ||  (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)" ng-click="addSupplier()">
 
     </form>
 
     
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $scope.addSupplier = function(){
+            var supplier = {
+                name:"",
+                email:"",
+                cName:"",
+                tel:"",
+                address:"",
+            }
 
+            supplier.name = document.getElementById("supName").value;
+            supplier.email = document.getElementById("Email").value;
+            supplier.cName = document.getElementById("compName").value;
+            supplier.tel = document.getElementById("tp").value;
+            supplier.address = document.getElementById("compAddress").value;
+
+           if(supplier.name == ""){
+                document.getElementById("msg").innerHTML = "Enter name";
+           }else if(supplier.email == ""){
+                document.getElementById("msg").innerHTML = "Enter email";
+           }else if(supplier.cName == ""){
+                document.getElementById("msg").innerHTML = "Enter customer name";
+           }else if(supplier.tel == ""){
+                document.getElementById("msg").innerHTML = "Enter customer telephone number";
+           }else if(supplier.address == ""){
+                document.getElementById("msg").innerHTML = "Enter customer address";
+           }else{
+               console.log(supplier);
+                $http({
+                method : "POST",
+                data:JSON.stringify(supplier),
+                url : "http://localhost:3000/supplier/"
+                }).then(function mySuccess(response) {
+
+                reservationId = response.data;
+                console.log(reservationId);
+                document.getElementById("msg").innerHTML = "<h1>done</h1> id - "+reservationId;
+                
+                }, function myError(response) {
+                $scope.result = response.statusText;
+        });
+           }
+        }
+    });
+</script>
 </body>
 </html>
