@@ -12,7 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Load main script file -->
-<script src="index.js"></script>
+<script src="hall.js"></script>
 <style>
     #msg{
        color: red; 
@@ -22,14 +22,34 @@
 
 <div ng-app="myApp" ng-controller="myCtrl"> 
         <div class="jumbotron text-center">
-            <h1>Reservation Sysytem</h1>
+            <h1>Reservation Sysytem Hall</h1>
             <a href="hall.html"><button class="btn btn-lg btn-primary">Hall</button></a>
                 
             <a href="room.html"><button class="btn btn-lg btn-primary">Room</button></a>
         </div>
         
-        <div class="container" id="x">
-               
+        <div>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Tel</th>
+                            <th>Nic</th>
+                            <th>Address</th>
+                            <th>Booking date</th>
+                            <th>Function Date</th>
+                        </tr>
+                        <tr ng-repeat="x in data">
+                            <td>{{x.h_rid}}</td>
+                            <td>{{x.h_cname}}</td>
+                            <td>{{x.h_phone}}</td>
+                            <td>{{x.h_nic}}</td>
+                            <td>{{x.h_address}}</td>
+                            <td>{{x.h_bookingdate}}</td>
+                            <td>{{x.h_functiondate}}</td>
+                        </tr>
+                    </table>
+                
                 <!-- <div ng:include="template.url"></div> -->
                    
                      

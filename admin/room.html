@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Load main script file -->
+<script src="room.js"></script>
+<style>
+    #msg{
+       color: red; 
+    }
+</style>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+        <div class="jumbotron text-center">
+            <h1>Reservation Sysytem - room</h1>
+            <a href="hall.html"><button class="btn btn-lg btn-primary">Hall</button></a>
+                
+            <a href="room.html"><button class="btn btn-lg btn-primary">Room</button></a>
+        </div>
+        
+        <div>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Tel</th>
+                        <th>Nic</th>
+                        <th>Address</th>
+                        <th>Booking date</th>
+                        <th>Check in</th>
+                        <th>Check out</th>
+                        <th>S Room</th>
+                        <th>D Room</th>
+                    </tr>
+                    <tr ng-repeat="x in data">
+                        <td>{{x.r_rid}}</td>
+                        <td>{{x.r_cname}}</td>
+                        <td>{{x.r_phone}}</td>
+                        <td>{{x.r_nic}}</td>
+                        <td>{{x.r_address}}</td>
+                        <td>{{x.r_bookingdate}}</td>
+                        <td>{{x.check_in}}</td>
+                        <td>{{x.check_out}}</td>
+                        <td>{{x.no_singleroom}}</td>
+                        <td>{{x.no_doubleroom}}</td>
+                    </tr>
+                </table>
+                
+                
+                <!-- <div ng:include="template.url"></div> -->
+                   
+                     
+                    
+        </div>
+    
+
+</div>
+
+
+
+</body>
+</html>

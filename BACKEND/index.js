@@ -58,7 +58,7 @@ app.get('/rooms',(req,res)=>{
         }
     });
 });
-//get a room
+//add bookings
 app.post('/booking/',(req,res)=>{
     
     
@@ -95,6 +95,30 @@ app.post('/booking/',(req,res)=>{
 app.get('/myBookings/:id',(req,res)=>{
     var bookings;
     mysqlConnection.query('SELECT * FROM rooms',(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+//Load hall bookings
+app.get('/hallBooking/',(req,res)=>{
+    var bookings;
+    mysqlConnection.query('SELECT * FROM hall_reservation',(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+//Load room bookings
+app.get('/roomBooking/',(req,res)=>{
+    var bookings;
+    mysqlConnection.query('SELECT * FROM room_reservation',(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
