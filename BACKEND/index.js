@@ -83,9 +83,10 @@ app.post('/booking/',(req,res)=>{
     
 });
 //Load Customer bookings
+///TODO
 app.get('/myBookings/:id',(req,res)=>{
     var bookings;
-    mysqlConnection.query('SELECT * FROM rooms',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT * FROM room_reservation where  room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{

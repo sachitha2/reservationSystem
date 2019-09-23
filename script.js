@@ -276,7 +276,19 @@ app.controller('myCtrl', function($scope, $http) {
     }
 
     
+    $scope.findMyB = function(id){
+        $http({
+            method : "GET",
+            url : "http://localhost:3000/myBookings/"+id
+        }).then(function mySuccess(response) {
 
+            reservationId = response.data;
+            console.log(reservationId);
+            
+            }, function myError(response) {
+            // $scope.result = response.statusText;
+        });
+    }
 });
 
 
