@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <!-- Load main script file -->
+        <script src="supplier.js"></script> 
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <div class="jumbotron text-center">
+            <div ng:include="'headder.html'"></div>
+    </div>
+    <form name="myForm">
+        <p>Name:
+            <input name="sId" ng-model="sId" placeholder="Supplier ID" class="form-control" required>
+            <span ng-show="myForm.sId.$touched && myForm.sId.$invalid">The name is required.</span>
+        </p>
+
+        <p>Address:
+        <input name="myAddress" ng-model="myAddress" required>
+        </p>
+
+    </form>
+
+    <p>We use the ng-show directive to only show the error message if the field has been touched AND is empty.</p>
+
+</body>
+</html>
