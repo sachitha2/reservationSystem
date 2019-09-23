@@ -200,7 +200,16 @@ app.controller('myCtrl', function($scope, $http) {
        hall.payment = document.getElementById('pay_amount').value;
 
 
+        if(hall.bknDate == ""){
+            document.getElementById("msg").innerHTML = "Enter date";
+        }else if(hall.purpose == ""){
+            document.getElementById("msg").innerHTML = "Enter purpose";
+        }else if(hall.payment == ""){
+            document.getElementById("msg").innerHTML = "Enter payment";
+        }
+        else {
 
+       
 
 
        var temp = {
@@ -219,6 +228,7 @@ app.controller('myCtrl', function($scope, $http) {
      };
         $scope.template = $scope.templates[4];
         $scope.data = temp.data;
+    }
     }
 
     $scope.backDesideInFinish = function(){
