@@ -29,6 +29,9 @@
         </div>
         
         <div>
+                <center>
+                      <p>Search : <input type="text" placeholder="Search" ng-model="globalSearch.$" class="form-control"></p> 
+                </center>
                 <table class="table table-hover table-bordered table-striped table-dark">
                         <tr>
                             <th>Id</th>
@@ -39,7 +42,7 @@
                             <th>Booking date</th>
                             <th>Function Date</th>
                         </tr>
-                        <tr ng-repeat="x in data">
+                        <tr ng-repeat="x in data | filter:globalSearch">
                             <td>{{x.h_rid}}</td>
                             <td>{{x.h_cname}}</td>
                             <td>{{x.h_phone}}</td>
