@@ -2,6 +2,12 @@
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
     $scope.IsDisabled = false;
+    $scope.login = false;
+
+    if($scope.login == false){
+        
+    }
+    
     var hall = {
         //bId:"",
         bknDate :"",
