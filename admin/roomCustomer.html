@@ -121,22 +121,22 @@
                   serviceType:serviceType
               }
               if(id == undefined){
-                  console.log("id undefined");
-              }
-                $http({
-                    method : "POST",
-                    url : "http://localhost:3000/roomUpdate/",
-                    data:data
-                }).then(function mySuccess(response) {
+                  $scope.msg = "ID is empty";
+              }else
+                {
+                    $http({
+                        method : "POST",
+                        url : "http://localhost:3000/roomUpdate/",
+                        data:data
+                    }).then(function mySuccess(response) {
     
-                    room = response.data;
-                    console.log(room);
+                        room = response.data;
+                        console.log(room);
                   
-
-                    
                     }, function myError(response) {
                     // $scope.result = response.statusText;
                 });
+                }
             }
 
             $scope.find = function(){

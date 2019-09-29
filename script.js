@@ -167,14 +167,10 @@ app.controller('myCtrl', function($scope, $http) {
     $scope.finishRoomBkng = function(){
         $scope.room.aDate = document.getElementById('arrive').value;
         $scope.room.dDate = document.getElementById('depart').value;
-        $scope.room.sR = document.getElementById('no_sin_rooms').value;
-        $scope.room.dR = document.getElementById('no_doub_rooms').value;
         if($scope.room.aDate == ""){
             document.getElementById("msg").innerHTML = "Enter a arrival date";
         }else if($scope.room.dDate == ""){
             document.getElementById("msg").innerHTML = "Enter a depart date";
-        }else if($scope.room.sR + $scope.room.dR == 0){
-            document.getElementById("msg").innerHTML = "Select a room";
         }
         else{
 
@@ -187,12 +183,6 @@ app.controller('myCtrl', function($scope, $http) {
             },{
                 name:"Depart Date",
                 data:$scope.room.dDate
-            },{
-                name:"Number of single rooms",
-                data:$scope.room.sR
-            },{
-                name:"Numer of double rooms",
-                data:$scope.room.dR
             }
             ]
         };

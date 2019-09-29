@@ -22,11 +22,13 @@
 
 
 <h2>Booking type {{bTypeHead}}</h2>
-<div id="bknData">
+<div id="bknData" style="background: blanchedalmond">
     <ul>
         <li ng-repeat="x in data"><h2>{{x.name}} : {{x.data}}</h2></li>
     </ul>
     <!-- {{data}} -->
 </div>
-<div id="result">{{result}}</div>
-<button class="btn btn-primary btn-lg" ng-click="finish()"   ng-disabled="IsDisabled">Finish</button>
+<center>
+        <div id="result">{{result}}</div>
+        <button class="btn btn-primary btn-lg" ng-click="finish()"   ng-disabled="IsDisabled">Finish</button>
+</center>
