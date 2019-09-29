@@ -111,7 +111,8 @@ app.delete('/booking/:id',(req,res)=>{
 //edit my booking
 app.post('/updateMyBooking/',(req,res)=>{
     var data = (req.body);
-    mysqlConnection.query("UPDATE room_reservation SET r_cname = 'Sam ',r_phone = '071', r_nic = '98314', r_address = 'po', r_bookingdate = '2019-09-11', check_in = '2019-09-18', check_out = '2019-09-11' WHERE room_reservation.r_rid = ?;",[data.id],(err,rows,fields)=>{
+    console.log(data);
+    mysqlConnection.query("UPDATE room_reservation SET r_cname = '"+data.name+"',r_phone = '"+data.tp+"', r_nic = '"+data.nic+"', r_address = '', r_bookingdate = curdate(), check_in = '"+data.arrive+"', check_out = '"+data.depart+"' WHERE room_reservation.r_rid = ?;",[data.id],(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{

@@ -10,28 +10,34 @@
                 
         <p>Customer Name:
             <input name="cName" ng-model="cName" id="cName" placeholder="Customer Name" class="form-control"  required>
-        </p>
+            <span ng-show="CustomerForm.cName.$touched && CustomerForm.cName.$invalid">Customer name is required.</span>
+            </p>
 
         <p>NIC:
             <input name="nic" ng-model="nic" id="nic" placeholder="nic" class="form-control" required>
+            <span ng-show="CustomerForm.nic.$touched && CustomerForm.nic.$invalid">NIC is required.</span>
         </p>
 
         
 
         <p>Phone Number:
             <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
+            <span ng-show="CustomerForm.tp.$touched && CustomerForm.tp.$invalid">Telephone number is required.</span>
          </p>
 
         <p>Arrive:
             <input name="arrive" ng-model="arrive" id="arrive" placeholder="Arrive date" class="form-control" required>
-           </p>
+            <span ng-show="CustomerForm.arrive.$touched && CustomerForm.arrive.$invalid">Arrival date is required.</span>
+        </p>
 
         <p>Depart:
                 <input name="depart" ng-model="depart" id="depart" placeholder="depart date" class="form-control" required>
-                </p>
-        <div id="msg">{{msg}}</div>
+                <span ng-show="CustomerForm.depart.$touched && CustomerForm.depart.$invalid">Depart date is required.</span>
+        </p>
+        
         <center>
-            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  value="Update" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" >
-            <input class="btn btn-danger btn-lg" type="button" ng-click="deleteMyBooking()" value="Delete"  id="delete">
+            <div id="msg">{{msg}}</div>
+            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  value="Update" ng-disabled="myBookingBtn || ((CustomerForm.cName.$dirty && CustomerForm.cName.$invalid) || (CustomerForm.nic.$dirty && CustomerForm.nic.$invalid) || (CustomerForm.tp.$dirty && CustomerForm.tp.$invalid) || (CustomerForm.arrive.$dirty && CustomerForm.arrive.$invalid) || (CustomerForm.depart.$dirty && CustomerForm.depart.$invalid))" >
+            <input class="btn btn-danger btn-lg" type="button" ng-click="deleteMyBooking()" value="Delete" ng-disabled="myBookingBtn"  id="delete">
         </center>
     </form>

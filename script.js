@@ -2,6 +2,7 @@
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
     $scope.IsDisabled = false;
+    $scope.myBookingBtn = true;
     $scope.login = false;
 
     if($scope.login == false){
@@ -283,6 +284,7 @@ app.controller('myCtrl', function($scope, $http) {
                 data = response.data;
                 console.log(data);
                 if(data.length != 0){
+                    $scope.myBookingBtn = false;
                     $scope.cName = data[0].r_cname;
                     $scope.nic = data[0].r_nic;
                     $scope.tp = data[0].r_phone;
@@ -313,10 +315,56 @@ app.controller('myCtrl', function($scope, $http) {
                 $scope.arrive = "";
                 $scope.depart = "";
                 document.getElementById("bookingId").value = "";
-                
+                $scope.myBookingBtn = true;
+                $scope.msg = data;
                 }, function myError(response) {
                 // $scope.result = response.statusText;
             });
+        }
+    }
+
+    $scope.updateData = function(){
+        var id = document.getElementById("bookingId").value;
+        if(id.length != 0){
+           var name = $scope.cName;
+           var nic = $scope.nic;
+           var tp = $scope.tp;
+           var arrive = $scope.arrive;
+           var depart = $scope.depart;
+
+           var data = {
+               name:name,
+               nic:nic,
+               id:id,
+               tp:tp,
+               arrive:arrive,
+               depart:depart
+           }
+
+
+
+           console.log(data);
+
+
+           $http({
+                method : "POST",
+                data:JSON.stringify(data),
+                url : "http://localhost:3000/updateMyBooking/"
+                }).then(function mySuccess(response) {
+
+                data = response.data;
+                console.log(data);
+                $scope.cName = "";
+                $scope.nic = "";
+                $scope.tp = "";
+                $scope.arrive = "";
+                $scope.depart = "";
+                document.getElementById("bookingId").value = "";
+                $scope.myBookingBtn = true;
+                $scope.msg = "Successfully updated";
+            }, function myError(response) {
+            // $scope.result = response.statusText;
+        });
         }
     }
 });
