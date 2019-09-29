@@ -31,7 +31,7 @@
                 </p>
         <div id="msg">{{msg}}</div>
         <center>
-            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  id="submit" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" ng-click="updateData()">
-            <input class="btn btn-danger btn-lg" ng-click="updateData()" value="Delete"  id="delete" ng-disabled="true" ng-click="updateData()">
+            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  value="Update" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" >
+            <input class="btn btn-danger btn-lg" type="button" ng-click="deleteMyBooking()" value="Delete"  id="delete">
         </center>
     </form>

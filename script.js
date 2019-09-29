@@ -282,11 +282,37 @@ app.controller('myCtrl', function($scope, $http) {
 
                 data = response.data;
                 console.log(data);
-                $scope.cName = data[0].r_cname;
-                $scope.nic = data[0].r_nic;
-                $scope.tp = data[0].r_phone;
-                $scope.arrive = data[0].check_in;
-                $scope.depart = data[0].check_out;
+                if(data.length != 0){
+                    $scope.cName = data[0].r_cname;
+                    $scope.nic = data[0].r_nic;
+                    $scope.tp = data[0].r_phone;
+                    $scope.arrive = data[0].check_in;
+                    $scope.depart = data[0].check_out;
+                }
+                }, function myError(response) {
+                // $scope.result = response.statusText;
+            });
+        }
+    }
+
+
+    $scope.deleteMyBooking = function(){
+        var id = document.getElementById("bookingId").value;
+        if(id.length != 0){
+            $http({
+                method : "DELETE",
+                data:"",
+                url : "http://localhost:3000/booking/"+id
+            }).then(function mySuccess(response) {
+    
+                data = response.data;
+                console.log(data);
+                $scope.cName = "";
+                $scope.nic = "";
+                $scope.tp = "";
+                $scope.arrive = "";
+                $scope.depart = "";
+                document.getElementById("bookingId").value = "";
                 
                 }, function myError(response) {
                 // $scope.result = response.statusText;
