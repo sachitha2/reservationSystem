@@ -136,7 +136,7 @@ app.get('/suppliers/',(req,res)=>{
 
 //Load A supplier
 app.get('/supplier/:id',(req,res)=>{
-    var bookings;
+    
     mysqlConnection.query('SELECT * FROM suppliers WHERE s_id = ?',[req.params.id],(err,rows,fields)=>{
         if(!err){
             res.send(rows);
@@ -145,6 +145,20 @@ app.get('/supplier/:id',(req,res)=>{
         }
     });
 });
+//Edit A supplier
+app.post('/editSupplier/',(req,res)=>{
+    var data = (req.body);
+
+    mysqlConnection.query("UPDATE suppliers SET s_name = '"+data.name+"', s_company = '"+data.compName+"', s_phone = '"+data.tp+"', s_email = '"+data.Email+"', s_comaddress = '"+data.compAddress+"', s_comphone = '' WHERE suppliers.s_id = ?;",[data.id],(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+
 //Load room bookings
 app.get('/roomBooking/',(req,res)=>{
     var bookings;
@@ -157,6 +171,17 @@ app.get('/roomBooking/',(req,res)=>{
     });
 });
 
+//Load a room bookings
+app.get('/roomBooking/:id',(req,res)=>{
+    var bookings;
+    mysqlConnection.query('SELECT * FROM room_reservation WHERE r_rid = ?',[req.params.id],(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 
 
 

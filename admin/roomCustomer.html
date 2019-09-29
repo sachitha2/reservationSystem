@@ -28,44 +28,44 @@
         <div>   
                 
                 <center>
-                        <p>Enter supplier Id : <input type="text" placeholder="Supplier Id" ng-model="supplierId" class="form-control"></p> 
-                        <button class="btn btn-lg btn-primary" ng-click="findSupplier()">Find</button>
+                        <p>Enter Customer Booking Id : <input type="text" placeholder="Customer Id" ng-model="CustomerId" class="form-control"></p> 
+                        <button class="btn btn-lg btn-primary" ng-click="findCustomer()">Find</button>
                     </center>
                   <div>
-                    <form name="supplierForm">
+                    <form name="CustomerForm">
 
-                        <!-- <p>Supplier ID:
-                            <input type="text" name="supId" ng-model="supId" placeholder="Supplier ID" class="form-control" required>
-                            <span ng-show="supplierForm.supId.$touched && supplierForm.supId.$invalid">Supplier ID is required.</span>
+                        <!-- <p>Customer ID:
+                            <input type="text" name="supId" ng-model="supId" placeholder="Customer ID" class="form-control" required>
+                            <span ng-show="CustomerForm.supId.$touched && CustomerForm.supId.$invalid">Customer ID is required.</span>
                         </p> -->
                 
-                        <p>Supplier Name:
-                            <input name="supName" ng-model="supName" id="supName" placeholder="Supplier Name" class="form-control" required>
-                            <span ng-show="supplierForm.supName.$touched && supplierForm.supName.$invalid">Supplier Name is required.</span>
+                        <p>Customer Name:
+                            <input name="supName" ng-model="supName" id="supName" placeholder="Customer Name" class="form-control"  readonly>
+                            <span ng-show="CustomerForm.supName.$touched && CustomerForm.supName.$invalid">Customer Name is required.</span>
                         </p>
                 
                         <p>Email:
-                            <input name="Email" ng-model="Email" id="Email" placeholder="Email" class="form-control" required>
-                            <span ng-show="supplierForm.Email.$touched && supplierForm.Email.$invalid">Email is required.</span>
+                            <input name="Email" ng-model="Email" id="Email" placeholder="Email" class="form-control" readonly>
+                            <span ng-show="CustomerForm.Email.$touched && CustomerForm.Email.$invalid">Email is required.</span>
                         </p>
                 
                         <p>Company Name:
-                            <input name="compName" ng-model="compName" id="compName" placeholder="Company Name" class="form-control" required>
-                            <span ng-show="supplierForm.compName.$touched && supplierForm.compName.$invalid">Company Name is required.</span>
+                            <input name="compName" ng-model="compName" id="compName" placeholder="Company Name" class="form-control" readonly>
+                            <span ng-show="CustomerForm.compName.$touched && CustomerForm.compName.$invalid">Company Name is required.</span>
                         </p>
                 
                         <p>Phone Number:
                             <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
-                            <span ng-show="supplierForm.tp.$touched && supplierForm.tp.$invalid">Phone Number is required.</span>
+                            <span ng-show="CustomerForm.tp.$touched && CustomerForm.tp.$invalid">Phone Number is required.</span>
                         </p>
                 
                         <p>Company Address:
                             <input name="compAddress" ng-model="compAddress" id="compAddress" placeholder="Company Address" class="form-control" required>
-                            <span ng-show="supplierForm.compAddress.$touched && supplierForm.compAddress.$invalid">Company Address is required.</span>
+                            <span ng-show="CustomerForm.compAddress.$touched && CustomerForm.compAddress.$invalid">Company Address is required.</span>
                         </p>
                         <div id="msg"></div>
                         <center>
-                            <input class="btn btn-primary btn-lg" ng-click="save()" type="submit"  id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) ||  (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)" ng-click="addSupplier()">
+                            <input class="btn btn-primary btn-lg" ng-click="save()" type="submit"  id="submit" ng-disabled="(CustomerForm.supName.$dirty && CustomerForm.supName.$invalid) ||  (CustomerForm.Email.$dirty && CustomerForm.Email.$invalid) || (CustomerForm.compName.$dirty && CustomerForm.compName.$invalid) || (CustomerForm.tp.$dirty && CustomerForm.tp.$invalid) || (CustomerForm.compAddress.$dirty && CustomerForm.compAddress.$invalid)" ng-click="addCustomer()">
                         </center>
                     </form>
                   </div>
@@ -87,25 +87,25 @@
 
             
 
-            $scope.findSupplier = function(){
-                var id = $scope.supplierId;
-                console.log("supplier id is "+id);
+            $scope.findCustomer = function(){
+                var id = $scope.CustomerId;
+                console.log("Customer id is "+id);
                 $http({
                     method : "GET",
-                    url : "http://localhost:3000/supplier/"+id
+                    url : "http://localhost:3000/Customer/"+id
                 }).then(function mySuccess(response) {
     
-                    supplier = response.data;
-                    // $scope.data = supplier;
-                    console.log(supplier);
-                    console.log("length "+supplier.length);
+                    Customer = response.data;
+                    // $scope.data = Customer;
+                    console.log(Customer);
+                    console.log("length "+Customer.length);
 
-                    if(supplier.length == 1){
-                        $scope.supName = supplier[0].s_name;
-                        $scope.Email = supplier[0].s_email;
-                        $scope.compName = supplier[0].s_company;
-                        $scope.tp = supplier[0].s_phone;
-                        $scope.compAddress = supplier[0].s_comaddress;
+                    if(Customer.length == 1){
+                        $scope.supName = Customer[0].s_name;
+                        $scope.Email = Customer[0].s_email;
+                        $scope.compName = Customer[0].s_company;
+                        $scope.tp = Customer[0].s_phone;
+                        $scope.compAddress = Customer[0].s_comaddress;
                     }else{
                         $scope.supName = "";
                         $scope.Email = "";
@@ -121,7 +121,7 @@
 
            
             $scope.save = function(){
-                var id = $scope.supplierId;
+                var id = $scope.CustomerId;
                 var name =  $scope.supName;
 
                 var Email = $scope.Email ;
@@ -137,16 +137,16 @@
                     tp:tp,
                     compAddress:compAddress
                 }
-                console.log("supplier name is "+JSON.stringify(d));
+                console.log("Customer name is "+JSON.stringify(d));
                 $http({
                     method : "POST",
-                    url : "http://localhost:3000/editSupplier/",
+                    url : "http://localhost:3000/editCustomer/",
                     data:d
                 }).then(function mySuccess(response) {
     
-                    supplier = response.data;
-                    // $scope.data = supplier;
-                    console.log(supplier);
+                    Customer = response.data;
+                    // $scope.data = Customer;
+                    console.log(Customer);
                     
                     }, function myError(response) {
                     // $scope.result = response.statusText;
