@@ -29,43 +29,60 @@
                 
                 <center>
                         <p>Enter Customer Booking Id : <input type="text" placeholder="Customer Id" ng-model="CustomerId" class="form-control"></p> 
-                        <button class="btn btn-lg btn-primary" ng-click="findCustomer()">Find</button>
+                        <button class="btn btn-lg btn-primary" ng-click="find()">Find</button>
                     </center>
                   <div>
                     <form name="CustomerForm">
 
-                        <!-- <p>Customer ID:
-                            <input type="text" name="supId" ng-model="supId" placeholder="Customer ID" class="form-control" required>
-                            <span ng-show="CustomerForm.supId.$touched && CustomerForm.supId.$invalid">Customer ID is required.</span>
-                        </p> -->
+                        
                 
                         <p>Customer Name:
-                            <input name="supName" ng-model="supName" id="supName" placeholder="Customer Name" class="form-control"  readonly>
-                            <span ng-show="CustomerForm.supName.$touched && CustomerForm.supName.$invalid">Customer Name is required.</span>
+                            <input name="cName" ng-model="cName" id="cName" placeholder="Customer Name" class="form-control"  readonly>
                         </p>
                 
-                        <p>Email:
-                            <input name="Email" ng-model="Email" id="Email" placeholder="Email" class="form-control" readonly>
-                            <span ng-show="CustomerForm.Email.$touched && CustomerForm.Email.$invalid">Email is required.</span>
+                        <p>NIC:
+                            <input name="nic" ng-model="nic" id="nic" placeholder="nic" class="form-control" readonly>
                         </p>
                 
-                        <p>Company Name:
-                            <input name="compName" ng-model="compName" id="compName" placeholder="Company Name" class="form-control" readonly>
-                            <span ng-show="CustomerForm.compName.$touched && CustomerForm.compName.$invalid">Company Name is required.</span>
-                        </p>
+                        
                 
                         <p>Phone Number:
-                            <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
-                            <span ng-show="CustomerForm.tp.$touched && CustomerForm.tp.$invalid">Phone Number is required.</span>
-                        </p>
+                            <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" readonly>
+                         </p>
                 
-                        <p>Company Address:
-                            <input name="compAddress" ng-model="compAddress" id="compAddress" placeholder="Company Address" class="form-control" required>
-                            <span ng-show="CustomerForm.compAddress.$touched && CustomerForm.compAddress.$invalid">Company Address is required.</span>
+                        <p>Arrive:
+                            <input name="arrive" ng-model="arrive" id="arrive" placeholder="Arrive date" class="form-control" readonly>
+                           </p>
+
+                        <p>Depart:
+                                <input name="depart" ng-model="depart" id="depart" placeholder="depart date" class="form-control" readonly>
+                                </p>
+
+
+                        <p>Number of single rooms:
+                                    <input type="number"  name="sR" ng-model="sR" id="sR" placeholder="Number of single rooms" class="form-control" required>
+                                    <span ng-show="CustomerForm.sR.$touched && CustomerForm.sR.$invalid">Number of single rooms is required.</span>
                         </p>
-                        <div id="msg"></div>
+
+
+                        <p>Number of double rooms:
+                                <input type="number"  name="dR" ng-model="dR" id="dR" placeholder="Number of double rooms" class="form-control" required>
+                                <span ng-show="CustomerForm.dR.$touched && CustomerForm.dR.$invalid">Number of double rooms is required.</span>
+                        </p>
+
+
+                        <p>Room Type:
+                                <input type="text"  name="roomType" ng-model="roomType" id="roomType" placeholder="Room type" class="form-control" required>
+                                <span ng-show="CustomerForm.roomType.$touched && CustomerForm.roomType.$invalid">Room type is required.</span>
+                        </p>
+
+                        <p>Service Type:
+                                <input type="text"  name="serviceType" ng-model="serviceType" id="serviceType" placeholder="Room type" class="form-control" required>
+                                <span ng-show="CustomerForm.serviceType.$touched && CustomerForm.serviceType.$invalid">Service type is required.</span>
+                        </p>
+                        <div id="msg">{{msg}}</div>
                         <center>
-                            <input class="btn btn-primary btn-lg" ng-click="save()" type="submit"  id="submit" ng-disabled="(CustomerForm.supName.$dirty && CustomerForm.supName.$invalid) ||  (CustomerForm.Email.$dirty && CustomerForm.Email.$invalid) || (CustomerForm.compName.$dirty && CustomerForm.compName.$invalid) || (CustomerForm.tp.$dirty && CustomerForm.tp.$invalid) || (CustomerForm.compAddress.$dirty && CustomerForm.compAddress.$invalid)" ng-click="addCustomer()">
+                            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  id="submit" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" ng-click="updateData()">
                         </center>
                     </form>
                   </div>
@@ -85,14 +102,49 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope, $http) {
 
-            
+            $scope.sR = 0;
+            $scope.dR = 0;
 
-            $scope.findCustomer = function(){
+
+            $scope.updateData = function(){
+              var id = $scope.CustomerId;
+              var sR = $scope.sR;
+              var dR = $scope.dR;
+              var roomType = $scope.roomType;
+              var serviceType = $scope.serviceType;
+
+              var data = {
+                  id:id,
+                  sR:sR,
+                  dR:dR,
+                  roomType:roomType,
+                  serviceType:serviceType
+              }
+              if(id == undefined){
+                  console.log("id undefined");
+              }
+                $http({
+                    method : "POST",
+                    url : "http://localhost:3000/roomUpdate/",
+                    data:data
+                }).then(function mySuccess(response) {
+    
+                    room = response.data;
+                    console.log(room);
+                  
+
+                    
+                    }, function myError(response) {
+                    // $scope.result = response.statusText;
+                });
+            }
+
+            $scope.find = function(){
                 var id = $scope.CustomerId;
                 console.log("Customer id is "+id);
                 $http({
                     method : "GET",
-                    url : "http://localhost:3000/Customer/"+id
+                    url : "http://localhost:3000/roomBooking/"+id
                 }).then(function mySuccess(response) {
     
                     Customer = response.data;
@@ -101,17 +153,19 @@
                     console.log("length "+Customer.length);
 
                     if(Customer.length == 1){
-                        $scope.supName = Customer[0].s_name;
-                        $scope.Email = Customer[0].s_email;
-                        $scope.compName = Customer[0].s_company;
-                        $scope.tp = Customer[0].s_phone;
-                        $scope.compAddress = Customer[0].s_comaddress;
+                        $scope.cName = Customer[0].r_cname;
+                        $scope.nic = Customer[0].r_nic;
+                        $scope.tp = Customer[0].r_phone;
+                        $scope.arrive = Customer[0].check_in;
+                        $scope.depart = Customer[0].check_out;
+                        // $scope.tp = Customer[0].s_phone;
+                        // $scope.compAddress = Customer[0].s_comaddress;
                     }else{
-                        $scope.supName = "";
-                        $scope.Email = "";
-                        $scope.compName = "";
-                        $scope.tp = "";
-                        $scope.compAddress = "";
+                        // $scope.cName = "";
+                        // $scope.Email = "";
+                        // $scope.compName = "";
+                        // $scope.tp = "";
+                        // $scope.compAddress = "";
                        
                     }
                     }, function myError(response) {
@@ -122,7 +176,7 @@
            
             $scope.save = function(){
                 var id = $scope.CustomerId;
-                var name =  $scope.supName;
+                var name =  $scope.cName;
 
                 var Email = $scope.Email ;
                 var compName = $scope.compName;

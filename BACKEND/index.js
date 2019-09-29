@@ -159,6 +159,19 @@ app.post('/editSupplier/',(req,res)=>{
 });
 
 
+//update data
+app.post('/roomUpdate/',(req,res)=>{
+    var data = (req.body);
+    mysqlConnection.query("UPDATE room_reservation SET no_singleroom = '"+data.sR+"', no_doubleroom = '"+data.dR+"' WHERE room_reservation.r_rid =  ?;",[data.id],(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+
 //Load room bookings
 app.get('/roomBooking/',(req,res)=>{
     var bookings;
