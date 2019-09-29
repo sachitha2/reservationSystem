@@ -28,31 +28,47 @@
         <div>   
                 
                 <center>
-                        <p>Search : <input type="text" placeholder="Search" ng-model="globalSearch.$" class="form-control"></p> 
-                  </center>
-                <table class="table table-hover table-bordered table-striped table-dark">
-                    <tr>
-                        <th>Id</th>
-                        <th>Cancel</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Company Phone</th>
+                        <p>Enter supplier Id : <input type="text" placeholder="Supplier Id" ng-model="supplierId" class="form-control"></p> 
+                        <button class="btn btn-lg btn-primary" onclick="findSupplier()">Find</button>
+                    </center>
+                  <div>
+                    <form name="supplierForm">
 
-                    </tr>
-                    <tr ng-repeat="x in data | filter : globalSearch">
-                        <td>{{x.s_id}}</td>
-                        <td><button type="button" class="btn btn-danger btn-sm" ng-click="del(x.s_id)">Cancel</button></td>
-                        <td>{{x.s_name}}</td>
-                        <td>{{x.s_company}}</td>
-                        <td>{{x.s_phone}}</td>
-                        <td>{{x.s_email}}</td>
-                        <td>{{x.s_comaddress}}</td>
-                        <td>{{x.s_comphone}}</td>
-                    </tr>
-                </table>
+                        <!-- <p>Supplier ID:
+                            <input type="text" name="supId" ng-model="supId" placeholder="Supplier ID" class="form-control" required>
+                            <span ng-show="supplierForm.supId.$touched && supplierForm.supId.$invalid">Supplier ID is required.</span>
+                        </p> -->
+                
+                        <p>Supplier Name:
+                            <input name="supName" ng-model="supName" id="supName" placeholder="Supplier Name" class="form-control" required>
+                            <span ng-show="supplierForm.supName.$touched && supplierForm.supName.$invalid">Supplier Name is required.</span>
+                        </p>
+                
+                        <p>Email:
+                            <input name="Email" ng-model="Email" id="Email" placeholder="Email" class="form-control" required>
+                            <span ng-show="supplierForm.Email.$touched && supplierForm.Email.$invalid">Email is required.</span>
+                        </p>
+                
+                        <p>Company Name:
+                            <input name="compName" ng-model="compName" id="compName" placeholder="Company Name" class="form-control" required>
+                            <span ng-show="supplierForm.compName.$touched && supplierForm.compName.$invalid">Company Name is required.</span>
+                        </p>
+                
+                        <p>Phone Number:
+                            <input type="number" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
+                            <span ng-show="supplierForm.tp.$touched && supplierForm.tp.$invalid">Phone Number is required.</span>
+                        </p>
+                
+                        <p>Company Address:
+                            <input name="compAddress" ng-model="compAddress" id="compAddress" placeholder="Company Address" class="form-control" required>
+                            <span ng-show="supplierForm.compAddress.$touched && supplierForm.compAddress.$invalid">Company Address is required.</span>
+                        </p>
+                        <div id="msg"></div>
+                        <center>
+                            <input class="btn btn-primary btn-lg" type="submit"  id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) ||  (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)" ng-click="addSupplier()">
+                        </center>
+                    </form>
+                  </div>
                 
                 
                 <!-- <div ng:include="template.url"></div> -->
