@@ -80,8 +80,9 @@
                                 <input type="text"  name="serviceType" ng-model="serviceType" id="serviceType" placeholder="Room type" class="form-control" required>
                                 <span ng-show="CustomerForm.serviceType.$touched && CustomerForm.serviceType.$invalid">Service type is required.</span>
                         </p>
-                        <div id="msg">{{msg}}</div>
+                        
                         <center>
+                            <div id="msg">{{msg}}</div>
                             <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  id="submit" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" ng-click="updateData()">
                         </center>
                     </form>
@@ -132,7 +133,7 @@
     
                         room = response.data;
                         console.log(room);
-                  
+                        $scope.msg = "Done";
                     }, function myError(response) {
                     // $scope.result = response.statusText;
                 });
@@ -158,6 +159,10 @@
                         $scope.tp = Customer[0].r_phone;
                         $scope.arrive = Customer[0].check_in;
                         $scope.depart = Customer[0].check_out;
+                        $scope.sR = Customer[0].no_singleroom;
+                        $scope.dR = Customer[0].no_doubleroom;
+                        $scope.roomType = Customer[0].roomType;
+                        $scope.serviceType = Customer[0].serviceType;
                         // $scope.tp = Customer[0].s_phone;
                         // $scope.compAddress = Customer[0].s_comaddress;
                     }else{
@@ -174,38 +179,7 @@
             }
 
            
-            $scope.save = function(){
-                var id = $scope.CustomerId;
-                var name =  $scope.cName;
-
-                var Email = $scope.Email ;
-                var compName = $scope.compName;
-                var tp =  $scope.tp;
-                var compAddress = $scope.compAddress;
-
-                var d = {
-                    id:id,
-                    name:name,
-                    Email:Email,
-                    compName:compName,
-                    tp:tp,
-                    compAddress:compAddress
-                }
-                console.log("Customer name is "+JSON.stringify(d));
-                $http({
-                    method : "POST",
-                    url : "http://localhost:3000/editCustomer/",
-                    data:d
-                }).then(function mySuccess(response) {
-    
-                    Customer = response.data;
-                    // $scope.data = Customer;
-                    console.log(Customer);
-                    
-                    }, function myError(response) {
-                    // $scope.result = response.statusText;
-                });
-            }
+            
 
            
         });

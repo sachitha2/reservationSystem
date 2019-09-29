@@ -129,7 +129,7 @@ app.post('/editSupplier/',(req,res)=>{
 //update room data
 app.post('/roomUpdate/',(req,res)=>{
     var data = (req.body);
-    mysqlConnection.query("UPDATE room_reservation SET no_singleroom = '"+data.sR+"', no_doubleroom = '"+data.dR+"' WHERE room_reservation.r_rid =  ?;",[data.id],(err,rows,fields)=>{
+    mysqlConnection.query("UPDATE room_reservation SET no_singleroom = '"+data.sR+"', no_doubleroom = '"+data.dR+"',roomType = '"+data.roomType+"',serviceType = '"+data.serviceType+"' WHERE room_reservation.r_rid =  ?;",[data.id],(err,rows,fields)=>{
         if(!err){
             res.send(rows);
         }else{
