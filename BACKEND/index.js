@@ -131,6 +131,20 @@ app.get('/suppliers/',(req,res)=>{
         }
     });
 });
+
+
+
+//Load A supplier
+app.get('/supplier/:id',(req,res)=>{
+    var bookings;
+    mysqlConnection.query('SELECT * FROM suppliers WHERE s_id = ?',[req.params.id],(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 //Load room bookings
 app.get('/roomBooking/',(req,res)=>{
     var bookings;

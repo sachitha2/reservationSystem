@@ -29,7 +29,7 @@
                 
                 <center>
                         <p>Enter supplier Id : <input type="text" placeholder="Supplier Id" ng-model="supplierId" class="form-control"></p> 
-                        <button class="btn btn-lg btn-primary" onclick="findSupplier()">Find</button>
+                        <button class="btn btn-lg btn-primary" ng-click="findSupplier()">Find</button>
                     </center>
                   <div>
                     <form name="supplierForm">
@@ -84,40 +84,34 @@
     
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function($scope, $http) {
-            $scope.supplier = function(){
+
+            
+
+            $scope.findSupplier = function(){
+                var id = $scope.supplierId;
+                console.log("supplier id is "+id);
                 $http({
                     method : "GET",
-                    url : "http://localhost:3000/suppliers/"
+                    url : "http://localhost:3000/supplier/"+id
                 }).then(function mySuccess(response) {
     
                     supplier = response.data;
-                    $scope.data = supplier;
+                    // $scope.data = supplier;
                     console.log(supplier);
-                    
+                    $scope.supName = supplier[0].s_name;
+                    $scope.Email = supplier[0].s_email;
+                    $scope.compName = supplier[0].s_company;
+                    $scope.tp = supplier[0].s_phone;
+                    $scope.compAddress = supplier[0].s_comaddress;
                     }, function myError(response) {
                     // $scope.result = response.statusText;
                 });
             }
 
-            $scope.supplier();
+           
 
 
-            $scope.del = function(id){
-                $http({
-                    method : "DELETE",
-                    data:"",
-                    url : "http://localhost:3000/supplier/"+id
-                }).then(function mySuccess(response) {
-
-                    supplier = response.data;
-                    // $scope.data = supplier;
-                    console.log(supplier);
-                    $scope.supplier();
-                    
-                    }, function myError(response) {
-                    // $scope.result = response.statusText;
-                });
-    }
+           
         });
     
     
