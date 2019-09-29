@@ -1,8 +1,37 @@
+<button ng-click="defaultTemplate()" class="btn btn-success" type="button">Back</button>
 <h1>Find your bookings</h1>
 <p>Enter your booking id to find your bookings</p>
-<input type="text" placeholder="Booking Id" class="form-control" ng-model="bookingId">
+<input type="text" placeholder="Booking Id" id="bookingId" class="form-control" ng-model="bookingId">
 <br>
-<center><button type="button" class="btn btn-primary btn-lg" ng-click="findMyB(bookingId)">Find</button></center>
-<div>
-    {{myBookingOut}}
-</div>
+<center><button type="button" class="btn btn-primary btn-lg"  ng-click="findMyB()">Find</button></center>
+<form name="CustomerForm">
+
+                        
+                
+        <p>Customer Name:
+            <input name="cName" ng-model="cName" id="cName" placeholder="Customer Name" class="form-control"  required>
+        </p>
+
+        <p>NIC:
+            <input name="nic" ng-model="nic" id="nic" placeholder="nic" class="form-control" required>
+        </p>
+
+        
+
+        <p>Phone Number:
+            <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
+         </p>
+
+        <p>Arrive:
+            <input name="arrive" ng-model="arrive" id="arrive" placeholder="Arrive date" class="form-control" required>
+           </p>
+
+        <p>Depart:
+                <input name="depart" ng-model="depart" id="depart" placeholder="depart date" class="form-control" required>
+                </p>
+        <div id="msg">{{msg}}</div>
+        <center>
+            <input class="btn btn-primary btn-lg" ng-click="updateData()" type="submit"  id="submit" ng-disabled="((CustomerForm.sR.$dirty && CustomerForm.sR.$invalid) ||  (CustomerForm.dR.$dirty && CustomerForm.dR.$invalid) || (CustomerForm.roomType.$dirty && CustomerForm.roomType.$invalid) || (CustomerForm.serviceType.$dirty && CustomerForm.serviceType.$invalid))" ng-click="updateData()">
+            <input class="btn btn-danger btn-lg" ng-click="updateData()" value="Delete"  id="delete" ng-disabled="true" ng-click="updateData()">
+        </center>
+    </form>

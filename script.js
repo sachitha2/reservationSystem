@@ -267,23 +267,31 @@ app.controller('myCtrl', function($scope, $http) {
     }
 
 
-    $scope.loadMyBookings = function(){
-
-    }
+    
 
     
-    $scope.findMyB = function(id){
-        $http({
-            method : "GET",
-            url : "http://localhost:3000/myBookings/"+id
-        }).then(function mySuccess(response) {
+    $scope.findMyB = function(){
+        var id = document.getElementById("bookingId").value;
+        if(id.length != 0){
 
-            reservationId = response.data;
-            console.log(reservationId);
-            
-            }, function myError(response) {
-            // $scope.result = response.statusText;
-        });
+        
+            $http({
+                method : "GET",
+                url : "http://localhost:3000/myBookings/"+id
+            }).then(function mySuccess(response) {
+
+                data = response.data;
+                console.log(data);
+                $scope.cName = data[0].r_cname;
+                $scope.nic = data[0].r_nic;
+                $scope.tp = data[0].r_phone;
+                $scope.arrive = data[0].check_in;
+                $scope.depart = data[0].check_out;
+                
+                }, function myError(response) {
+                // $scope.result = response.statusText;
+            });
+        }
     }
 });
 

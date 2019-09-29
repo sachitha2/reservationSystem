@@ -49,39 +49,7 @@ mysqlConnection.connect((err)=>{
 app.listen(3000,()=>console.log('Express server is running ar port 3000 '));
 
 
-//add bookings
-app.post('/booking/',(req,res)=>{
-    
-    
-    
-    let booking = req.body;
-    if(booking.type == 1){
-        
-        //Room booking
-        mysqlConnection.query("INSERT INTO room_reservation (r_rid, r_cname, r_phone, r_nic, r_address, r_bookingdate, check_in, check_out, no_singleroom, no_doubleroom, no_trippleroom) VALUES (NULL, '"+booking.customer.fName+" "+booking.customer.lName +"', '"+booking.customer.tel+"', '"+booking.customer.nic+"', '"+booking.customer.address+"', curdate(), '"+booking.room.aDate+"', '"+booking.room.dDate+"', '"+booking.room.sR+"', '"+booking.room.dR+"', '0');",(err,rows,fields)=>{
-            if(!err){
-                res.send(rows);
-            }else{
-                console.log(err);
-            }
-        });
 
-
-    }else if(booking.type == 2){
-        mysqlConnection.query("INSERT INTO hall_reservation (h_rid, h_cname, h_phone, h_nic, h_address, h_crowd, h_menu, h_type, h_bookingdate, h_functiondate) VALUES (NULL, '"+booking.customer.fName+" "+booking.customer.lName +"', '"+booking.customer.tel+"', '"+booking.customer.nic+"', '"+booking.customer.address+"', '0', '0', '0', curdate(), '"+booking.hall.bknDate+"');",(err,rows,fields)=>{
-            if(!err){
-                res.send(rows);
-            }else{
-                console.log(err);
-            }
-        });
-    }else{
-
-       //Nothing here
-    }
-    
-    
-});
 //add supplier
 app.post('/supplier/',(req,res)=>{
         let supplier = req.body;
