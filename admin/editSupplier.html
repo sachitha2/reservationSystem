@@ -55,7 +55,7 @@
                         </p>
                 
                         <p>Phone Number:
-                            <input type="number" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
+                            <input type="text" name="tp" ng-model="tp" id="tp" placeholder="Phone Number" class="form-control" required>
                             <span ng-show="supplierForm.tp.$touched && supplierForm.tp.$invalid">Phone Number is required.</span>
                         </p>
                 
@@ -65,7 +65,7 @@
                         </p>
                         <div id="msg"></div>
                         <center>
-                            <input class="btn btn-primary btn-lg" type="submit"  id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) ||  (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)" ng-click="addSupplier()">
+                            <input class="btn btn-primary btn-lg" ng-click="save()" type="submit"  id="submit" ng-disabled="(supplierForm.supName.$dirty && supplierForm.supName.$invalid) ||  (supplierForm.Email.$dirty && supplierForm.Email.$invalid) || (supplierForm.compName.$dirty && supplierForm.compName.$invalid) || (supplierForm.tp.$dirty && supplierForm.tp.$invalid) || (supplierForm.compAddress.$dirty && supplierForm.compAddress.$invalid)" ng-click="addSupplier()">
                         </center>
                     </form>
                   </div>
@@ -98,18 +98,58 @@
                     supplier = response.data;
                     // $scope.data = supplier;
                     console.log(supplier);
-                    $scope.supName = supplier[0].s_name;
-                    $scope.Email = supplier[0].s_email;
-                    $scope.compName = supplier[0].s_company;
-                    $scope.tp = supplier[0].s_phone;
-                    $scope.compAddress = supplier[0].s_comaddress;
+                    console.log("length "+supplier.length);
+
+                    if(supplier.length == 1){
+                        $scope.supName = supplier[0].s_name;
+                        $scope.Email = supplier[0].s_email;
+                        $scope.compName = supplier[0].s_company;
+                        $scope.tp = supplier[0].s_phone;
+                        $scope.compAddress = supplier[0].s_comaddress;
+                    }else{
+                        alert("No data found");
+                    }
                     }, function myError(response) {
                     // $scope.result = response.statusText;
                 });
             }
 
            
+            $scope.save = function(){
+                var id = $scope.supplierId;
+                var name =  $scope.supName;
 
+                var Email = $scope.Email ;
+                var compName = $scope.compName;
+                var tp =  $scope.tp;
+                var compAddress = $scope.compAddress;
+
+                var d = {
+                    id:id,
+                    name:name,
+                    Email:Email,
+                    compName:compName,
+                    tp:tp,
+                    compAddress:compAddress
+                }
+                console.log("supplier name is "+JSON.stringify(d));
+                // $http({
+                //     method : "GET",
+                //     url : "http://localhost:3000/supplier/"+id
+                // }).then(function mySuccess(response) {
+    
+                //     supplier = response.data;
+                //     // $scope.data = supplier;
+                //     console.log(supplier);
+                //     $scope.supName = supplier[0].s_name;
+                //     $scope.Email = supplier[0].s_email;
+                //     $scope.compName = supplier[0].s_company;
+                //     $scope.tp = supplier[0].s_phone;
+                //     $scope.compAddress = supplier[0].s_comaddress;
+                //     }, function myError(response) {
+                //     // $scope.result = response.statusText;
+                // });
+            }
 
            
         });
