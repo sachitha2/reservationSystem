@@ -59,6 +59,9 @@ app.controller('myCtrl', function($scope, $http) {
     },{
         name:"my bookings",
         url:"myBookings.html"
+    },{
+        name:"Report",
+        url:"report.html"
     }
     ];
 
@@ -74,7 +77,9 @@ app.controller('myCtrl', function($scope, $http) {
     $scope.loadMyBookingsPage = function(){
         $scope.template = $scope.templates[5];
     }
-
+    $scope.loadReaport = function(){
+        $scope.template = $scope.templates[6];
+    }
     //this is for room
     $scope.registerCustomerForRoom=function(){
         $scope.bookingType = 1;

@@ -96,6 +96,66 @@ app.get('/myBookings/:id',(req,res)=>{
 });
 
 
+app.get('/myReport/',(req,res)=>{
+    
+
+
+    var content = {
+        id:"",
+        type:"",
+        date:"",
+    }
+
+    someJSONdata = [
+        
+     ];
+
+    mysqlConnection.query('SELECT * FROM room_reservation ;',(err,rooms,fields)=>{
+        if(!err){
+            
+            mysqlConnection.query('SELECT * FROM hall_reservation ;',(err,hall,fields)=>{
+                if(!err){
+                    
+                    
+
+                    lenRoom = rooms.length;
+
+                    for(i = 0;i<lenRoom;i++){
+                        content.id = rooms[i]['r_rid'];
+                        content.type = "Room";
+                        content.date = rooms[i]['r_bookingdate'];
+                        someJSONdata.push(content);
+                        content = {};
+                    }
+                    // console.log(someJSONdata);
+                    
+
+
+                    lenHall = hall.length;
+                    for(i = 0;i<lenHall;i++){
+                        content.id = hall[i]['h_rid'];
+                        content.type = "Hall";
+                        content.date = hall[i]['h_bookingdate'];
+                        someJSONdata.push(content);
+                        content = {};
+                    }  
+
+                    res.send(someJSONdata);
+                }else{
+                    console.log(err);
+                }
+            });
+
+
+            // res.send(rooms);
+           
+        }else{
+            console.log(err);
+        }
+    });
+});
+
+
 //delete my booking
 app.delete('/booking/:id',(req,res)=>{
     mysqlConnection.query('DELETE FROM room_reservation WHERE room_reservation.r_rid =  ?;',[req.params.id],(err,rows,fields)=>{

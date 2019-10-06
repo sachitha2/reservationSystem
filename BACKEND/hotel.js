@@ -55,7 +55,7 @@ app.post('/supplier/',(req,res)=>{
         let supplier = req.body;
         console.log(supplier.name);
         // res.send(supplier);
-        mysqlConnection.query("INSERT INTO suppliers (s_id, s_name, s_company, s_phone, s_email, s_comaddress, s_comphone) VALUES (NULL, '"+supplier.name+"', '"+supplier.cName+"', '"+supplier.tel+"', '"+supplier.email+"', '"+supplier.address+"', '')",(err,rows,fields)=>{
+        mysqlConnection.query("INSERT INTO suppliers (s_id, s_name, s_company, s_phone, s_email, s_comaddress, s_comphone,date) VALUES (NULL, '"+supplier.name+"', '"+supplier.cName+"', '"+supplier.tel+"', '"+supplier.email+"', '"+supplier.address+"', '',curdate())",(err,rows,fields)=>{
             if(!err){
                 res.send(rows);
             }else{
@@ -98,7 +98,17 @@ app.get('/suppliers/',(req,res)=>{
         }
     });
 });
-
+//Load suppliers Report
+app.get('/report/',(req,res)=>{
+    sql = "SELECT * FROM `suppliers` WHERE MONTH(`date`) = MONTH(curdate()) AND YEAR(`date`) = YEAR(curdate())";
+    mysqlConnection.query(sql,(err,rows,fields)=>{
+        if(!err){
+            res.send(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 
 
 //Load A supplier
